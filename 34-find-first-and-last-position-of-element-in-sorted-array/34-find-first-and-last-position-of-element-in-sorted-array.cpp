@@ -1,43 +1,59 @@
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
-    int l  = 0; int r  = nums.size()-1;
-        int ans1 = -1;
-        int ans2 = -1;
-        vector<int>output;
-        while(r>=l){
-            int mid = (l+r)/2;
-            // finding the leftmost
-            if(nums[mid] == target){ // if equal so we have to find the leftone so check on left, so r = mid-1 
-                ans1 = mid;
-                r = mid-1;
-            }
-            else if(nums[mid]>target){
-               
-                r= mid-1;
-            }
-            else {
-                l = mid+1;
-            }
-        
+    int n = nums.size();
+    vector<int>output;    
+    int start =0;
+    int end = n-1;
+    int ans1 = -1;
+    int ans2 = -1;
+ 
+    while(start<=end)
+    {
+        int mid = (start + end)/2;
+        if(nums[mid] == target)
+        {
+            ans1 = mid;
+            end = mid-1; //left me jao 
+        }
+        else if(target>nums[mid])
+        {
+            start = mid+1;
+        }
+        else if(target < nums[mid])
+        {
+            end = mid-1;
         }
         
-        int left = 0; int right = nums.size()-1;
-            // finding the rightmost
-        while(right>=left){
-            int mid = ( left + right)/2;
-            if(nums[mid]<target ) left = mid+1;
-            else if(nums[mid]> target) right = mid-1;
-            else if(nums[mid] == target){ // if equal we have to find the rightmost, so check right, so left = m
-                ans2 = mid;
-                left = mid+1;
-            }
-        }
+    }
         
-
+      int s =0;
+   
+      int num = nums.size();
+           int e = num-1;
+     while(s<=e)
+    {
+        int mid = (s + e)/2;
+        if(nums[mid] == target)
+        {
+            ans2 = mid;
+            s = mid +1; //right me jao 
+        }
+        else if(target>nums[mid])
+        {
+            s = mid+1;
+        }
+        else if(target < nums[mid])
+        {
+           e = mid-1; 
+        }
+      
+    }
+ 
         output.push_back(ans1);
         output.push_back(ans2);
-        
         return output;
+
+        
     }
 };
